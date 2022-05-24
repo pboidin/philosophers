@@ -1,0 +1,1 @@
+INCLUDES += includes/philo.h
