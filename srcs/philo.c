@@ -9,7 +9,7 @@ int	main(int argc, char **argv)
 	if (ft_check_args(argc, argv))
 		return (1);
 	master = ft_philo_creator(argc, argv);
-	if (master == NULL)
+	if (!master)
 		return (1);
 	nb_ph = ft_atoi(argv[1]);
 	while (nb_ph--)
@@ -26,5 +26,5 @@ int	main(int argc, char **argv)
 		pthread_detach(master->thread_data);
 		master = master->next;
 	}
-	ft_free_clear(master);
+	//ft_free_clear(master);
 }
