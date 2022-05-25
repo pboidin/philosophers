@@ -26,5 +26,4 @@ int	main(int argc, char **argv)
 		pthread_detach(master->thread_data);
 		master = master->next;
 	}
-	//ft_free_clear(master);
 }
