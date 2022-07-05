@@ -7,8 +7,8 @@ NAME_PHILO		=	philo
 -include make/srcs.mk
 
 #	Compilation
-CC				=	gcc
-CFLAGS			=	-Wall -Werror -Wextra
+CC				=	clang
+CFLAGS			=	-Wall -Werror -Wextra -lpthread
 AR				=	ar rcs
 
 INCLUDES_PATH	=	./includes
