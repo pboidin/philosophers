@@ -8,12 +8,12 @@ NAME_PHILO		=	philo
 
 #	Compilation
 CC				=	clang
-CFLAGS			=	-Wall -Werror -Wextra -lpthread
+CFLAGS				=	-Wall -Werror -Wextra
 AR				=	ar rcs
 
-INCLUDES_PATH	=	./includes
+INCLUDES_PATH			=	./includes
 
-SRCS_OBJS		=	$(SRCS_SOURCES:.c=.o)
+SRCS_OBJS			=	$(SRCS_SOURCES:.c=.o)
 
 #	Delete
 RM				=	rm -rf

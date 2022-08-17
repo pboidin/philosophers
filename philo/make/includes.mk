@@ -1,1 +1,1 @@
-INCLUDES += includes/philo.h
+INCLUDES += includes/philosophers.h
