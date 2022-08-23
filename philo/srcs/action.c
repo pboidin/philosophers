@@ -4,14 +4,14 @@ void	ft_take_left_fork(philo_t *ph)
 {
 	pthread_mutex_lock(ph->l_fork);
 	ph->left_fork = 1;
-	log_print(ph, ph->id, ph->begin_val, "has taken a fork");
+	ft_printer(ph, ph->id, ph->begin_val, "has taken a fork");
 }
 
 void	ft_take_right_fork(philo_t *ph)
 {
 	pthread_mutex_lock(ph->r_fork);
 	ph->right_fork = 1;
-	log_print(ph, ph->id, ph->begin_val, "has taken a fork");
+	ft_printer(ph, ph->id, ph->begin_val, "has taken a fork");
 }
 
 int		ft_rout_loop(philo_t *ph)

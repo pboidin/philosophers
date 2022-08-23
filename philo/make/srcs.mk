@@ -1,7 +1,6 @@
 SRCS_SOURCES += srcs/printer.c
 SRCS_SOURCES += srcs/create_thread.c
 SRCS_SOURCES += srcs/main.c
-SRCS_SOURCES += srcs/action_3.c
 SRCS_SOURCES += srcs/action.c
 SRCS_SOURCES += srcs/create_philo_2.c
 SRCS_SOURCES += srcs/args.c

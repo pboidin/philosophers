@@ -2,13 +2,6 @@
 
 int	ft_init_const(int argc, char **argv, const_t *ph_const)
 {
-	ph_const->nb_ph = ft_atoi(argv[0]);
-	ph_const->time_to_die = ft_atoi(argv[1]);
-	ph_const->time_to_eat = ft_atoi(argv[2]);
-	ph_const->time_to_sleep = ft_atoi(argv[3]);
-	if (ph_const->nb_ph < 1 || ph_const->time_to_die < 1
-		|| ph_const->time_to_eat < 1 || ph_const->time_to_sleep < 1)
-		return (6);
 	if (argc == 4)
 		ph_const->nb_rep = -1;
 	else 
@@ -17,6 +10,14 @@ int	ft_init_const(int argc, char **argv, const_t *ph_const)
 		if (ph_const->nb_rep == -1)
 			return (6);
 	}
+	ph_const->nb_ph = ft_atoi(argv[0]);
+	ph_const->time_to_die = ft_atoi(argv[1]);
+	ph_const->time_to_eat = ft_atoi(argv[2]);
+	ph_const->time_to_sleep = ft_atoi(argv[3]);
+	if (ph_const->nb_ph < 1 || ph_const->time_to_die < 1
+		|| ph_const->time_to_eat < 1 || ph_const->time_to_sleep < 1)
+		return (6);
+	return (0);
 }
 
 int	ft_checker_ph(char *argv)
@@ -38,7 +39,7 @@ int	ft_checker_ph(char *argv)
 	return (0);
 }
 
-int	ft_checker_number(int argc, char *argv)
+int	ft_checker_number(int argc, char **argv)
 {
 	int	i;
 	int	j;
@@ -47,9 +48,9 @@ int	ft_checker_number(int argc, char *argv)
 	j = 0;
 	while (i < argc)
 	{
-		while (argv[j])
+		while (argv[i][j])
 		{
-			if (argv[j] < '0' || argv[j] > '9')
+			if (argv[i][j] < '0' || argv[i][j] > '9')
 				return (3);
 			j++;
 		}
@@ -58,10 +59,8 @@ int	ft_checker_number(int argc, char *argv)
 	return (0);
 }
 
-int	ft_checker_argts(int argc, char **argv)
+int	ft_checker_argts(int argc)
 {
-	int	key;
-
 	if (argc < 5)
 		return (1);
 	else if (argc > 6)
@@ -73,13 +72,17 @@ int	ft_check_args(int argc, char **argv, const_t *ph_const)
 {
 	int key;
 
-	if (key = ft_checker_argts(argc, argv) != 0)
+	key = ft_checker_argts(argc);
+	if (key)
 		return (key);
-	if (key = ft_checker_number(argc, argv) != 0)
+	key = ft_checker_number(argc, argv);
+	if (key)
 		return (key);
-	if (key = ft_checker_ph(argv) != 0)
+	key = ft_checker_ph(argv[1]);
+	if (key)
 		return (key);
-	if (key = ft_init_const(argc, &argv[1], ph_const))
+	key = ft_init_const(argc - 1, &argv[1], ph_const);
+	if (key)
 		return (key);
 	return (0);
 }

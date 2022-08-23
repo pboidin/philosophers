@@ -60,16 +60,16 @@ void	*ft_routine(void *args)
 	{
 	if (ph->id % 2 == 1 && ph->id == ph->ph_const->nb_ph)
 			msleep(ft_last_ph(ph), timestamp(0));
-		if (run_loop(ph))
+		if (ft_rout_loop(ph))
 			ft_take_left_fork(ph);
-		if (run_loop(ph))
+		if (ft_rout_loop(ph))
 			ft_take_right_fork(ph);
-		if (run_loop(ph))
+		if (ft_rout_loop(ph))
 			ft_eat(ph);
-		if (run_loop(ph))
+		if (ft_rout_loop(ph))
 			ft_sleep(ph);
-		if (run_loop(ph))
+		if (ft_rout_loop(ph))
 			ft_printer(ph, ph->id, ph->begin_val, "is thinking");
 	}
-	return (end_routine(ph));
+	return (ft_end(ph));
 }

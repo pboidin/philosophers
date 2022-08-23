@@ -41,7 +41,7 @@ int	ft_create_philos(info_t *info, int nb_ph)
 		return (7);
 	memset(info->philos, 0, sizeof(philo_t) * (nb_ph + 1));
 	gettimeofday(&begin, 0);
-	begin_val = begin.tv_sec * 1000 + begin.tv_sec / 1000;
+	begin_val = begin.tv_sec * 1000 + begin.tv_usec / 1000;
 	info->begin = begin_val;
 	while (i++ < nb_ph)
 		ft_init_ph(info, &info->philos[i], begin_val, i);
@@ -75,6 +75,7 @@ int	ft_init_info(info_t *info, int nb_ph)
 	info->all_threads = malloc(sizeof(pthread_t) * (nb_ph + 1));
 	if (!info->all_threads)
 		return (ft_free_forks(info), free(info->philos), 7);
+	memset(info->all_threads, 0, sizeof(pthread_t) * (nb_ph + 1));
 	pthread_mutex_init(&info->log, 0);
 	pthread_mutex_init(&info->end.mutex, 0);
 	info->end.end = 0;
