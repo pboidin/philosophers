@@ -43,8 +43,11 @@ int	ft_create_philos(info_t *info, int nb_ph)
 	gettimeofday(&begin, 0);
 	begin_val = begin.tv_sec * 1000 + begin.tv_usec / 1000;
 	info->begin = begin_val;
-	while (i++ < nb_ph)
+	while (i < nb_ph)
+	{
 		ft_init_ph(info, &info->philos[i], begin_val, i);
+		i++;
+	}
 	return (0);
 }
 

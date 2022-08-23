@@ -75,8 +75,6 @@ int	main (int argc, char **argv)
 	key = ft_waiting_threads(&info);
 	if (key)
 		return (ft_free_table(&info), ft_printer_error(key), 1);
-	write(1, "DEBUT\n", 6);
 	ft_free_table(&info);
-	write(1, "DEBUT\n", 6);
 	return (0);
 }

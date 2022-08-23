@@ -51,11 +51,11 @@ void	ft_printer_error(int key)
 	if (key < 4)
 		ft_printer_error_2(key);
 	else if (key == 4)
-		write(2, "Too much philosopher maximum: 200\n", 33);
+		write(2, "Too much philosopher maximum: 200\n", 34);
 	else if (key == 5)
-		write(2, "Minimum one philosophers \n", 41);
+		write(2, "Minimum one philosophers \n", 26);
 	else if (key == 6)
-		write(2, "Wrong Arguments\n", 20);
+		write(2, "Wrong Arguments\n", 16);
 	else if (key == 7)
 		write(2, "Malloc error\n", 14);
 	else if (key == 8)

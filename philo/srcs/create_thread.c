@@ -8,12 +8,11 @@ int	ft_waiting_threads(info_t *info)
 
 	i = 0;
 	ret = 0;
-	while (i < info->ph_const.nb_ph && info->all_threads[i])
+	while (i++ < info->ph_const.nb_ph && info->all_threads[i])
 	{
 		key = pthread_join(info->all_threads[i], 0);
 		if (key && ret == 0)
 			ret = key;
-		i++;
 	}
 	return (ret);
 }
@@ -39,12 +38,13 @@ int	ft_init_threads(pthread_t *all_th, philo_t *all_ph, int nb_ph)
 	pthread_t	th;
 
 	i = 0;
-	while (i++ < nb_ph)
+	while (i < nb_ph)
 	{
 		th = ft_thread_init(&all_ph[i]);
 		if (!th)
 			return (8);
 		all_th[i] = th;
+		i++;
 	}
 	return (0);
 }
