@@ -2,21 +2,27 @@
 
 int	main (int argc, char **argv)
 {
-	t_info	master;
+	info_t	info;
+	int		key;
 
-	if (ft_check_args(argc, argv, &master))
-		return (1);
-	if (ft_create_philo(&master))
-	{
-		ft_free_ph(&master);
-		return (1);
-	}
-	master.start_time = ft_runtime_to_ms();
-	if (ft_thread(&master))
-	{
-		ft_free_ph(&master);
-		return (1);
-	}
-	ft_free_ph(&master);
-	return(0);
+	key = ft_check_args(argc, argv, &info.ph_const);
+	if (key)	
+		return (ft_printer_error(key), 1);
+	key = ft_init_info(&info, info.ph_const.nb_ph);
+	if (key)
+		return (ft_printer_error(key), 1);
+	key = ft_init_threads(info.all_threads, info.philos, info.ph_const.nb_ph);
+	if (key)
+		return (ft_printer_thread_error(&info, key));
+	while (timestamp(info.begin) < 30)
+		usleep(300);
+	info.begin += 30;
+	while (ft_check_end(&info))
+		ft_dead_checker(&info, info.ph_const.time_to_die,
+			info.ph_const.nb_ph);
+	key = ft_waiting_threads(&info);
+	if (key)
+		return (ft_free_table(&info), ft_printer_error(key), 1);
+	ft_free_table(&info);
+	return (0);
 }

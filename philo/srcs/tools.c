@@ -24,36 +24,23 @@ int	ft_atoi(char *str)
 	return (nb);
 }
 
-int	ft_error(char *message)
-{
-	write(STDERR_FILENO, message, ft_strlen(message));
-	exit(1);
-}
-
-int	ft_digit(char c)
-{
-	if (c >= 48 && c <= 57)
-		return (1);
-	return (0);
-}
-
-int	ft_strlen(char *str)
+static void	ft_free_philo(philo_t *ph)
 {
 	int	i;
 
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
+	i = -1;
+	while (++i < ph->ph_const->nb_ph)
+		pthread_mutex_destroy(&(ph[i].mut_last_eat));
+	free(ph);
 }
 
-long long	ft_runtime_to_ms(void)
+void	ft_free_table(info_t *info)
 {
-	long long		ms;
-	struct timeval	time;
-
-	gettimeofday(&time, NULL);
-	ms = time.tv_sec * 1000;
-	ms += time.tv_usec / 1000;
-	return (ms);
+	free_forks(info);
+	pthread_mutex_destroy(&info->end.mutex);
+	pthread_mutex_destroy(&info->end_threads.mutex);
+	pthread_mutex_destroy(&info->setup);
+	pthread_mutex_destroy(&info->log);
+	free_philo(info->philos);
+	free(info->all_threads);
 }

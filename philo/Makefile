@@ -8,7 +8,7 @@ NAME_PHILO		=	philo
 
 #	Compilation
 CC				=	clang
-CFLAGS				=	-Wall -Werror -Wextra -lpthread -std=c11
+CFLAGS				=	-Wall -Werror -Wextra -pthread -std=gnu11
 AR				=	ar rcs
 
 INCLUDES_PATH			=	./includes
