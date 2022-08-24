@@ -75,9 +75,6 @@ void				*ft_routine(void *args);
 
 // Args
 int					ft_init_const(int argc, char **argv, const_t *ph_const);
-int					ft_checker_ph(char *argv);
-int					ft_checker_number(int argc, char **argv);
-int					ft_checker_argts(int argc);
 int					ft_check_args(int argc, char **argv, const_t *ph_const);
 
 

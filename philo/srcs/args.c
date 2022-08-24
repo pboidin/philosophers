@@ -1,25 +1,5 @@
 #include "../includes/philosophers.h"
 
-int	ft_init_const(int argc, char **argv, const_t *ph_const)
-{
-	if (argc == 4)
-		ph_const->nb_rep = -1;
-	else 
-	{
-		ph_const->nb_rep = ft_atoi(argv[argc - 1]);
-		if (ph_const->nb_rep == -1)
-			return (6);
-	}
-	ph_const->nb_ph = ft_atoi(argv[0]);
-	ph_const->time_to_die = ft_atoi(argv[1]);
-	ph_const->time_to_eat = ft_atoi(argv[2]);
-	ph_const->time_to_sleep = ft_atoi(argv[3]);
-	if (ph_const->nb_ph < 1 || ph_const->time_to_die < 1
-		|| ph_const->time_to_eat < 1 || ph_const->time_to_sleep < 1)
-		return (6);
-	return (0);
-}
-
 int	ft_checker_ph(char *argv)
 {
 	int	rslt;
@@ -39,27 +19,35 @@ int	ft_checker_ph(char *argv)
 	return (0);
 }
 
-int	ft_checker_number(int argc, char **argv)
+static int	ft_checker_number2(char *argv)
 {
 	int	i;
-	int	j;
+
+	i = 0;
+	while (argv[i])
+	{
+		if (argv[i] > '9' || argv[i] < '0')
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+static int	ft_checker_number(int argc, char **argv)
+{
+	int	i;
 
 	i = 1;
-	j = 0;
 	while (i < argc)
 	{
-		while (argv[i][j])
-		{
-			if (argv[i][j] < '0' || argv[i][j] > '9')
-				return (3);
-			j++;
-		}
+		if (!ft_checker_number2(argv[i]))
+			return (3);
 		i++;
 	}
 	return (0);
 }
 
-int	ft_checker_argts(int argc)
+static int	ft_checker_argts(int argc)
 {
 	if (argc < 5)
 		return (1);

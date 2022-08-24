@@ -22,13 +22,13 @@ static void	ft_dead_checker(info_t *info, int die, int nb_ph)
 	int	i;
 	int	stop;
 
-	i = 0;
+	i = -1;
 	pthread_mutex_lock(&(info->end.mutex));
 	stop = info->end.end;
 	pthread_mutex_unlock(&(info->end.mutex));
 	if (stop)
 		return ;
-	while (i++ < nb_ph)
+	while (++i < nb_ph)
 	{
 		ft_check_last_eat(info, &stop, i, die);
 		if (stop)
