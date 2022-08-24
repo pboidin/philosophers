@@ -44,8 +44,8 @@ static void	ft_free_philo(philo_t *ph)
 {
 	int	i;
 
-	i = 0;
-	while (i++ < ph->ph_const->nb_ph)
+	i = -1;
+	while (++i < ph->ph_const->nb_ph)
 		pthread_mutex_destroy(&(ph[i].mut_last_eat));
 	free(ph);
 }

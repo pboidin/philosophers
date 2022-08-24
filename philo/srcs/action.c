@@ -21,7 +21,8 @@ int		ft_rout_loop(philo_t *ph)
 		return (pthread_mutex_unlock(&(ph->end->mutex)), 0);
 	pthread_mutex_unlock(&(ph->end->mutex));
 	pthread_mutex_lock(&(ph->mut_last_eat));
-	if (timestamp(ph->begin_val) - ph->last_eat >= (long)ph->ph_const->time_to_die)
+	if (timestamp(ph->begin_val) - ph->last_eat >= 
+		(long)ph->ph_const->time_to_die)
 		return (pthread_mutex_unlock(&(ph->mut_last_eat)), 0);
 	pthread_mutex_unlock(&(ph->mut_last_eat));
 	if (ph->ph_const->nb_rep == -1)
@@ -38,9 +39,9 @@ int		ft_rout_loop(philo_t *ph)
 
 void	ft_wait(philo_t *ph)
 {
-	while (timestamp(ph->begin_val) < 30)
+	while (timestamp(ph->begin_val) < START)
 		usleep(300);
-	ph->begin_val += 30;
+	ph->begin_val += START;
 }
 
 void	*ft_one_philo(void *args)

@@ -26,7 +26,8 @@ void	ft_printer(philo_t *ph, int id, long begin_val, char *str)
 	pthread_mutex_lock(&(ph->end->mutex));
 	if (!ft_strcmp(str, "is eating"))
 		ph->last_eat = timestamp(ph->begin_val);
-	if (!ph->end->end && !(timestamp(ph->begin_val) - ph->last_eat >= (long)ph->ph_const->time_to_die))
+	if (!ph->end->end && !(timestamp(ph->begin_val) - ph->last_eat
+			>= (long)ph->ph_const->time_to_die))
 		printf("%li %d %s\n", timestamp(begin_val), id, str);
 	pthread_mutex_unlock(&(ph->mut_last_eat));
 	pthread_mutex_unlock(ph->log);

@@ -4,8 +4,8 @@ void	ft_free_forks(info_t *info)
 {
 	int	i;
 
-	i = 0;
-	while (i++ < info->ph_const.nb_ph)
+	i = -1;
+	while (++i < info->ph_const.nb_ph)
 		pthread_mutex_destroy(&info->all_fork[i]);
 	free(info->all_fork);
 }

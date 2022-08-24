@@ -8,11 +8,12 @@ int	ft_waiting_threads(info_t *info)
 
 	i = 0;
 	ret = 0;
-	while (i++ < info->ph_const.nb_ph && info->all_threads[i])
+	while (i < info->ph_const.nb_ph && info->all_threads[i])
 	{
 		key = pthread_join(info->all_threads[i], 0);
 		if (key && ret == 0)
 			ret = key;
+		i++;
 	}
 	return (ret);
 }

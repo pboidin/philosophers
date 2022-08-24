@@ -58,7 +58,7 @@ void	*ft_routine(void *args)
 		msleep(ph->ph_const->time_to_eat, timestamp(0));
 	while (ft_rout_loop(ph))
 	{
-	if (ph->id % 2 == 1 && ph->id == ph->ph_const->nb_ph)
+		if (ph->id % 2 == 1 && ph->id == ph->ph_const->nb_ph)
 			msleep(ft_last_ph(ph), timestamp(0));
 		if (ft_rout_loop(ph))
 			ft_take_left_fork(ph);
