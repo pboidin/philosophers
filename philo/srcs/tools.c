@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   tools.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: piboidin <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/24 23:21:09 by piboidin          #+#    #+#             */
+/*   Updated: 2022/08/24 23:21:10 by piboidin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/philosophers.h"
 
 int	ft_atoi(char *str)
@@ -40,7 +52,7 @@ long	timestamp(long begin)
 	return (time_value - begin);
 }
 
-static void	ft_free_philo(philo_t *ph)
+static void	ft_free_philo(t_philo *ph)
 {
 	int	i;
 
@@ -50,11 +62,11 @@ static void	ft_free_philo(philo_t *ph)
 	free(ph);
 }
 
-void	ft_free_table(info_t *info)
+void	ft_free_table(t_info *info)
 {
 	ft_free_forks(info);
 	pthread_mutex_destroy(&info->end.mutex);
-	pthread_mutex_destroy(&info->end_threads.mutex);
+	pthread_mutex_destroy(&info->t_endhreads.mutex);
 	pthread_mutex_destroy(&info->setup);
 	pthread_mutex_destroy(&info->log);
 	ft_free_philo(info->philos);

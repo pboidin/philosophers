@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   printer.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: piboidin <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/24 23:11:08 by piboidin          #+#    #+#             */
+/*   Updated: 2022/08/24 23:11:10 by piboidin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/philosophers.h"
 
-int	ft_printer_thread_error(info_t *info, int key)
+int	ft_printer_thread_error(t_info *info, int key)
 {
 	pthread_mutex_lock(&(info->end.mutex));
 	info->end.end = 1;
@@ -19,7 +31,7 @@ static int	ft_strcmp(const char *s1, const char *s2)
 	return ((unsigned char)*(s1 + i) - (unsigned char)*(s2 + i));
 }
 
-void	ft_printer(philo_t *ph, int id, long begin_val, char *str)
+void	ft_printer(t_philo *ph, int id, long begin_val, char *str)
 {
 	pthread_mutex_lock(&(ph->mut_last_eat));
 	pthread_mutex_lock(ph->log);

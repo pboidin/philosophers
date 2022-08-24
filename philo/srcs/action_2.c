@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   action_2.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: piboidin <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/24 23:10:53 by piboidin          #+#    #+#             */
+/*   Updated: 2022/08/24 23:11:01 by piboidin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/philosophers.h"
 
-void	ft_sleep(philo_t *ph)
+void	ft_sleep(t_philo *ph)
 {
 	int	i;
 
@@ -9,7 +21,7 @@ void	ft_sleep(philo_t *ph)
 	msleep(i, timestamp(0));
 }
 
-void	ft_eat(philo_t *ph)
+void	ft_eat(t_philo *ph)
 {
 	int	i;
 
@@ -23,7 +35,7 @@ void	ft_eat(philo_t *ph)
 	ph->num_of_eat++;
 }
 
-long	ft_last_ph(philo_t *ph)
+long	ft_last_ph(t_philo *ph)
 {
 	if (ph->ph_const->time_to_eat < ph->ph_const->time_to_sleep)
 		return (0);
@@ -31,7 +43,7 @@ long	ft_last_ph(philo_t *ph)
 		return (ph->ph_const->time_to_eat - ph->ph_const->time_to_sleep + 10);
 }
 
-void	*ft_end(philo_t *ph)
+void	*ft_end(t_philo *ph)
 {
 	if (ph->left_fork)
 	{
@@ -48,9 +60,9 @@ void	*ft_end(philo_t *ph)
 
 void	*ft_routine(void *args)
 {
-	philo_t	*ph;
+	t_philo	*ph;
 
-	ph = (philo_t *)args;
+	ph = (t_philo *)args;
 	ft_wait(ph);
 	if (ft_rout_loop(ph))
 		ft_printer(ph, ph->id, ph->begin_val, "is thinking");

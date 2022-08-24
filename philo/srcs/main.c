@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: piboidin <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/24 23:12:45 by piboidin          #+#    #+#             */
+/*   Updated: 2022/08/24 23:14:45 by piboidin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/philosophers.h"
 
-static void	ft_check_last_eat(info_t *info, int *stop, int i, int die)
+static void	ft_check_last_eat(t_info *info, int *stop, int i, int die)
 {
 	pthread_mutex_lock(&(info->philos[i].mut_last_eat));
 	if (timestamp(info->begin) - info->philos[i].last_eat >= (long)die)
@@ -17,7 +29,7 @@ static void	ft_check_last_eat(info_t *info, int *stop, int i, int die)
 	pthread_mutex_unlock(&(info->philos[i].mut_last_eat));
 }
 
-static void	ft_dead_checker(info_t *info, int die, int nb_ph)
+static void	ft_dead_checker(t_info *info, int die, int nb_ph)
 {
 	int	i;
 	int	stop;
@@ -37,28 +49,28 @@ static void	ft_dead_checker(info_t *info, int die, int nb_ph)
 	msleep(1, timestamp(0));
 }
 
-static int	ft_check_end(info_t *info)
+static int	ft_check_end(t_info *info)
 {
 	pthread_mutex_lock(&(info->end.mutex));
-	pthread_mutex_lock(&info->end_threads.mutex);
-	if (info->end_threads.end == info->ph_const.nb_ph
-        || info->end.end == 1 || info->ph_const.nb_rep == 0)
+	pthread_mutex_lock(&info->t_endhreads.mutex);
+	if (info->t_endhreads.end == info->ph_const.nb_ph
+		|| info->end.end == 1 || info->ph_const.nb_rep == 0)
 	{
 		info->end.end = 1;
-		return (pthread_mutex_unlock(&(info->end_threads.mutex)),
+		return (pthread_mutex_unlock(&(info->t_endhreads.mutex)),
 			pthread_mutex_unlock(&(info->end.mutex)), 0);
 	}
-	return (pthread_mutex_unlock(&(info->end_threads.mutex)),
+	return (pthread_mutex_unlock(&(info->t_endhreads.mutex)),
 		pthread_mutex_unlock(&(info->end.mutex)), 1);
 }
 
-int	main (int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	info_t	info;
+	t_info	info;
 	int		key;
-	
+
 	key = ft_check_args(argc, argv, &info.ph_const);
-	if (key)	
+	if (key)
 		return (ft_printer_error(key), 1);
 	key = ft_init_info(&info, info.ph_const.nb_ph);
 	if (key)

@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   args_2.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: piboidin <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/24 23:20:03 by piboidin          #+#    #+#             */
+/*   Updated: 2022/08/24 23:20:50 by piboidin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/philosophers.h"
 
-int	ft_init_const(int argc, char **argv, const_t *ph_const)
+int	ft_init_const(int argc, char **argv, t_const *ph_const)
 {
 	if (argc == 4)
 		ph_const->nb_rep = -1;
-	else 
+	else
 	{
 		ph_const->nb_rep = ft_atoi(argv[argc - 1]);
 		if (ph_const->nb_rep == -1)

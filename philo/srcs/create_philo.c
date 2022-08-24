@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   create_philo.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: piboidin <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/24 23:18:49 by piboidin          #+#    #+#             */
+/*   Updated: 2022/08/24 23:18:58 by piboidin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/philosophers.h"
 
-void	ft_free_forks(info_t *info)
+void	ft_free_forks(t_info *info)
 {
 	int	i;
 
@@ -10,36 +22,17 @@ void	ft_free_forks(info_t *info)
 	free(info->all_fork);
 }
 
-void	ft_init_ph(info_t *info, philo_t *philo, long begin_v, int i)
-{
-	philo->id = i + 1;
-	philo->last_eat = 0;
-	pthread_mutex_init(&(philo->mut_last_eat), 0);
-	philo->num_of_eat = 0;
-	philo->quota = 0;
-	philo->begin_val = begin_v;
-	philo->log = &info->log;
-	philo->left_fork = 0;
-	philo->right_fork = 0;
-	philo->l_fork = ft_init_l_fork(i, info->ph_const.nb_ph, info->all_fork);
-	philo->r_fork = ft_init_r_fork(i, info->ph_const.nb_ph, info->all_fork);
-	philo->ph_const = &info->ph_const;
-	philo->end = &(info->end);
-	philo->end_threads = &(info->end_threads);
-	philo->setup = &(info->setup);
-}
-
-int	ft_create_philos(info_t *info, int nb_ph)
+int	ft_create_philos(t_info *info, int nb_ph)
 {
 	int				i;
 	struct timeval	begin;
 	long			begin_val;
 
 	i = 0;
-	info->philos = malloc(sizeof(philo_t) * (nb_ph + 1));
+	info->philos = malloc(sizeof(t_philo) * (nb_ph + 1));
 	if (!info->philos)
 		return (7);
-	memset(info->philos, 0, sizeof(philo_t) * (nb_ph + 1));
+	memset(info->philos, 0, sizeof(t_philo) * (nb_ph + 1));
 	gettimeofday(&begin, 0);
 	begin_val = begin.tv_sec * 1000 + begin.tv_usec / 1000;
 	info->begin = begin_val;
@@ -51,7 +44,7 @@ int	ft_create_philos(info_t *info, int nb_ph)
 	return (0);
 }
 
-static int	ft_init_forks(info_t *info, int nb_ph)
+static int	ft_init_forks(t_info *info, int nb_ph)
 {
 	int	i;
 
@@ -65,7 +58,7 @@ static int	ft_init_forks(info_t *info, int nb_ph)
 	return (0);
 }
 
-int	ft_init_info(info_t *info, int nb_ph)
+int	ft_init_info(t_info *info, int nb_ph)
 {
 	int	key;
 
@@ -82,8 +75,8 @@ int	ft_init_info(info_t *info, int nb_ph)
 	pthread_mutex_init(&info->log, 0);
 	pthread_mutex_init(&info->end.mutex, 0);
 	info->end.end = 0;
-	pthread_mutex_init(&info->end_threads.mutex, 0);
-	info->end_threads.end = 0;
+	pthread_mutex_init(&info->t_endhreads.mutex, 0);
+	info->t_endhreads.end = 0;
 	pthread_mutex_init(&info->setup, 0);
 	return (0);
 }

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   args.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: piboidin <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/24 23:19:13 by piboidin          #+#    #+#             */
+/*   Updated: 2022/08/24 23:19:46 by piboidin         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/philosophers.h"
 
 int	ft_checker_ph(char *argv)
@@ -7,7 +19,7 @@ int	ft_checker_ph(char *argv)
 
 	i = 0;
 	rslt = 0;
-	while(argv[i])
+	while (argv[i])
 	{
 		rslt = (rslt * 10) + (argv[i] - 48);
 		i++;
@@ -56,9 +68,9 @@ static int	ft_checker_argts(int argc)
 	return (0);
 }
 
-int	ft_check_args(int argc, char **argv, const_t *ph_const)
+int	ft_check_args(int argc, char **argv, t_const *ph_const)
 {
-	int key;
+	int	key;
 
 	key = ft_checker_argts(argc);
 	if (key)
